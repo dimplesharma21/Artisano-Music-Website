@@ -23,8 +23,8 @@ router.get("/", function(req, res){
 
 router.post("/",function(req,res){
         models.Track.create({
-            Name:req.body.Name,
-            Playtime:req.body.Playtime
+            Name:req.sanitize(req.body.Name),
+            Playtime:req.sanitize(req.body.Playtime)
         }, function(err, track){
                     if(err){
                       console.log(err);
@@ -127,7 +127,8 @@ router.put("/:id", function(req, res){
       if(err){
           res.redirect("/tracks/"+req.params.id+"/edit");
       }  else {
-          res.redirect("/tracks");   
+          // res.redirect("/tracks"); 
+          res.redirect("/tracks/"+req.params.id);  
       }
    });
 });

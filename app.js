@@ -139,6 +139,10 @@ app.use('/artists', artists);
 app.use('/albums', albums);
 app.use('/tracks', tracks);
 
+app.get("*", function(req, res){
+   res.render("homepage"); 
+});
+
 app.listen(3000,function(){
     console.log("Server is listening at port 3000");
 })

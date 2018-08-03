@@ -23,8 +23,8 @@ router.get("/", function(req, res){
 
 router.post("/",function(req,res){
         models.Album.create({
-            Name:req.body.Name,
-            ReleaseDate:req.body.ReleaseDate
+            Name:req.sanitize(req.body.Name),
+            ReleaseDate:req.sanitize(req.body.ReleaseDate)
         }, function(err, album){
                     if(err){
                       console.log(err);
@@ -128,7 +128,8 @@ router.put("/:id", function(req, res){
       if(err){
           res.redirect("/albums/"+req.params.id+"/edit");
       }  else {
-          res.redirect("/albums");   
+          // res.redirect("/albums"); 
+           res.redirect("/albums/"+req.params.id);  
       }
    });
           
@@ -147,7 +148,8 @@ router.put("/:id", function(req, res){
       if(err){
           res.redirect("/albums/"+req.params.id+"/edit");
       }  else {
-          res.redirect("/albums");   
+          // res.redirect("/albums");  
+          res.redirect("/albums/"+req.params.id); 
       }
    });
         }

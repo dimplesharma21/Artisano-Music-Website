@@ -23,9 +23,9 @@ router.get("/", function(req, res){
 
 router.post("/",function(req,res){
         models.Artist.create({
-            Name:req.body.Name,
-            Description:req.body.Description,
-            YearsActive:req.body.YearsActive,
+            Name:req.sanitize(req.body.Name),
+            Description:req.sanitize(req.body.Description),
+            YearsActive:req.sanitize(req.body.YearsActive),
         }, function(err, artist){
                     if(err){
                       console.log(err);
@@ -84,7 +84,9 @@ router.put("/:id", function(req, res){
       if(err){
           res.redirect("/artists/"+req.params.id+"/edit");
       }  else {
-          res.redirect("/artists");   
+        // res.redirect("/artists");
+          res.redirect("/artists/"+req.params.id); 
+          // res.render("showartists", {id:req.params.id, albums:albums, Name: foundArtist.Name, Description: foundArtist.Description, YearsActive: foundArtist.YearsActive})  
       }
    });
 });
